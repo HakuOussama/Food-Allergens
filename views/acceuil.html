@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Acceuil</title>
+
+ 
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <style>
+.container {  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 0.7fr 1.6fr 0.8fr 0.9fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "header header header"
+    "Cards Cards Cards";
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px auto;
+  }
+
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .card-title {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .card-text {
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 0 20px;
+  }
+
+  .btn-primary {
+    margin: 0 auto;
+    display: block;
+    width: 120px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .btn-primary:hover {
+    background-color: #0069d9;
+  }
+
+
+.header {  display: grid;
+  grid-template-columns: 1.5fr 0.5fr 1fr;
+  grid-template-rows: 2.3fr 0.1fr 12fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "navbar navbar navbar"
+    "searchBar List List"
+    "searchBar List List";
+  grid-area: header;
+}
+
+
+.navbar { grid-area: navbar; }
+
+.searchBar { grid-area: searchBar; }
+
+.List { grid-area: List; }
+
+  </style>
+
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar navbar-expand-sm sticky-top navbar-dark bg-dark" >
+    {{^is_authenticated}}
+<form action="/new_user" method="get"> 
+    <button class="btn btn-primary mr-2" type="submit">New User</button>
+  </form> 
+  
+  <form action="/acceuil" method="post">
+    <button  class="btn btn-primary mr-2" type="submit">guess-acount</button>
+  </form>
+  {{/is_authenticated}}
+
+  {{#is_authenticated}}
+  <form action="/profile" method="get">
+    <button  class="btn btn-primary mr-2" type="submit">Profile</button>
+  </form>
+  <form action="/logout" method="post"> <button class="btn btn-danger" type="submit" >logout {{username}} </button></form>
+  {{/is_authenticated}}
+
+  
+  
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand" href="/" style= "text-align:left;">Can I Eat It </a>
+</nav>
+<span class="float-right" style="color: aliceblue;" >
+  {{username}}
+  {{name}}
+</span>
+</nav>
+
+
+
+<div class="header">
+  <div class="navbar"></div>
+  <div class="searchBar"> <div class="input-group">
+
+
+    <form action="/FoodCards" method="get" class="col-md-12 bg-light text-right">
+
+      
+        <input type="text" name="title" placeholder="Search a Product by its name " id="NomDuProduit"  class="form-control" />
+    
+      
+      <span><button type="submit" class="btn btn-primary">
+        <i class="fas fa-search">Search</i>
+      </button></span>
+    </form>
+  </div></div>
+  <div class="List">
+    <ul class="list-group">
+      <li class="list-group-item active">Your Allergens : {{#allergenListen}} <Strong>{{allergy}}</Strong>  {{/allergenListen}} </li>
+    </ul>
+</div>
+</div>
+
+  <div class="container">
+    <div class="Cards">
+      <div class="card1"> <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          {{#products}}
+          <img src="{{image_url}}" class="card-img-top" alt="...">
+          <h5 class="card-title">{{product_name}}</h5>
+          <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+          <form action="/SearchThisProduct/{{product_name}}" method="get"><button type="submit" class="btn btn-primary">GO</button></form>
+          
+          
+          <br>
+          <br>
+          {{/products}}
+        </div>
+      </div></div>
+    </div>
+ 
+
+
+  <div id="product-info"></div>
+
+  <script src="index.js"></script>
+ 
+
+
+   
+    
+
+   
+
+
+
+    {{#is_authenticated}}
+   
+    {{/is_authenticated}}
+
+
+    {{^isGuest}}
+
+    {{/isGuest}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

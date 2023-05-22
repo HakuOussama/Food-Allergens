@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Product</title>
+  <style>
+  .container {  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 0.3fr 1.5fr 1.8fr 0.4fr;
+  grid-auto-columns: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    ". . ."
+    "image ingrediens-list allergens"
+    "can-i-eat-it ingrediens-list allergens"
+    ". . .";
+}
+
+.image { grid-area: image; }
+
+.can-i-eat-it { grid-area: can-i-eat-it; }
+
+.ingrediens-list { grid-area: ingrediens-list; }
+
+.allergens { grid-area: allergens; }
+
+
+  </style>
+
+</head>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<body>
+  <nav class="navbar navbar-expand-lg navbar navbar-expand-sm sticky-top navbar-dark bg-dark" >
+    <form action="/acceuil" method="post">
+      <input type="submit" class="btn btn-primary mr-2" value="Annuler"> </div>
+      </form>
+    {{^is_authenticated}}
+<form action="/new_user" method="get"> 
+    <button class="btn btn-primary mr-2" type="submit">New User</button>
+  </form> 
+  
+  <form action="/acceuil" method="post">
+    <button  class="btn btn-primary mr-2" type="submit">guess-acount</button>
+  </form>
+  {{/is_authenticated}}
+
+  {{#is_authenticated}}
+  <form action="/profile" method="get">
+    <button  class="btn btn-primary mr-2" type="submit">Profile</button>
+  </form>
+  {{/is_authenticated}}
+
+
+  
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand" href="/" style= "text-align:left;">Can I Eat It </a>
+</nav>
+<span class="float-right" style="color: aliceblue;">
+  {{username}}
+  {{name}}
+</span>
+
+<nav ><form action="/FoodCards" method="get" style= "text-align:right;" >
+  <input type="text" name="title" placeholder="Search Products " id="NomDuProduit"  class="form-control" />
+  <!-- <button type="submit" class="pull-right"> </button> -->
+</form></nav>
+</nav>
+<ul class="list-group">
+  <li class="list-group-item active">Your Allergens : {{#allergenListen}} <Strong>{{allergy}}</Strong>  {{/allergenListen}} </li>
+  
+
+</ul>
+
+  
+  <div class="container">
+    <div class="food_title"><h1>{{product_name_fr}}</h1><br></div>
+    <div class="image">
+      <strong>IMAGE  : </strong>
+      <img src="{{image_url}}" class="card-img-top" alt="image_url">
+    </div>
+    <div class="ingrediens-list">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Ingrediens</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+        
+            <td>      {{#ingredients_tags}}
+              <li>{{.}}</li>
+            {{/ingredients_tags}}</td>
+          </tr>
+                    
+        </tbody>
+      </table>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+   </div>
+    <div class="allergens"><table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Allergens</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{#allergens_tags}}
+            <li>{{.}}</li>
+        {{/allergens_tags}}</td>
+        </tr>  
+      </tbody>
+    </table>
+    <img src ="{{image_nutrition_url}}" style="width: 400px;" alt="no image" >
+     </div>
+    <div class="can-i-eat-it">   
+      <!-- <span><form action="/can_I_Eat_It" method="get">
+         <button type="submit" value="can_I_Eat_It"> Can I Eat It ?</button>
+     </form></span> -->
+     <span>{{^can_I_Eat_It}}
+      <h5 style="background-color:rgb(236, 95, 95) ;">you have allergy from :</h5>
+      <ol>
+          {{#commonAllergyList}} 
+          <li>
+              {{allergy}}
+          </li>
+          {{/commonAllergyList}}
+      </ol>
+   
+      {{/can_I_Eat_It}}
+   
+  
+      {{#can_I_Eat_It}}
+      <h4 style="background-color: lightgreen;">Yes ,you can eat it  </h4>
+      {{/can_I_Eat_It}}
+          </span><br></br>
+</div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+    <!-- <div class="container">
+        <div class="margin"></div>
+        <div class="image">
+           <img src={{image_font_thumb_url}} alt="Description de l'image" width="500" height="500"> 
+        </div>
+        <div class="food-information">
+          
+          <div class="food_details"></div>
+        </div>
+        <div class="ingrediens">
+          <div class="ingrediens_title">  </div>
+          <div class="ingrediens_list"> </div>
+        </div>
+        <div class="alergens">
+          <div class="alergens_tags"></div>
+          <div class="alergens_title">  
+            
+        </div>
+      </div> -->
+
+
+</body>

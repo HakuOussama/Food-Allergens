@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar navbar-expand-sm sticky-top navbar-dark bg-dark" >
+        {{^is_authenticated}}
+    <form action="/new_user" method="get"> 
+        <button class="btn btn-primary mr-2" type="submit">New User</button>
+      </form> 
+      
+      <form action="/acceuil" method="post">
+        <button  class="btn btn-primary mr-2" type="submit">guess-acount</button>
+      </form>
+      {{/is_authenticated}}
+
+      {{#is_authenticated}}
+      <form action="/profile" method="get">
+        <button  class="btn btn-primary mr-2" type="submit">Profile</button>
+      </form>
+      <form action="/logout" method="post"> <button class="btn btn-danger" type="submit" >logout {{^isGuest}}as a{{/isGuest}} <strong>{{username}} </strong></button></form>
+      {{/is_authenticated}}
+
+      
+      
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="/" style= "text-align:left;">Can I Eat It </a>
+    </nav>
+</nav>
+
+
+    {{^can_I_Eat_It}}
+    <h4>The product have this allergies that you have</h4>
+    <ol>
+        {{#commonAllergyList}} 
+        <li>
+            {{allergy}}
+        </li>
+        {{/commonAllergyList}}
+    </ol>
+ 
+    {{/can_I_Eat_It}}
+ 
+
+    {{#can_I_Eat_It}}
+    <h4>you have no allergy from this product You can eat it </h4>
+    {{/can_I_Eat_It}}
+        
+    
+       
+       
+       
+    
+</body>
+</html>

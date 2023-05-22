@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New user</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar navbar-expand-sm sticky-top navbar-dark bg-dark" >
+    {{^is_authenticated}}
+<form action="/new_user" method="get"> 
+    <button class="btn btn-primary mr-2" type="submit">New User</button>
+  </form> 
+  
+  <form action="/createGuess" method="post">
+    <button  class="btn btn-primary mr-2" type="submit">guest-acount</button>
+  </form>
+  {{/is_authenticated}}
+
+  {{#is_authenticated}}
+  <form action="/profile" method="get">
+    <button  class="btn btn-primary mr-2" type="submit">Profile</button>
+  </form>
+  <form action="/logout" method="post"> <button class="btn btn-danger" type="submit" >logout {{username}} </button></form>
+  {{/is_authenticated}}
+
+  
+  
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand" href="/" style= "text-align:left;">Can I Eat It </a>
+</nav>
+</nav>
+
+  <div
+  class="bg-image"
+  style="
+    background-image: url('https://cdn.pixabay.com/photo/2023/03/25/09/35/wave-7875475_960_720.jpg');
+    height: 100vh; background-attachment:fixed; background-repeat:no-repeat; background-size: cover; ">
+  <div class="mask" >
+    <div class="d-flex justify-content-center align-items-center h-100">
+      <div style="margin-left: 25%  ; margin-right: 25%; margin-top: 10%;    ">
+        <form action="/new_user" method="post">
+
+          <input type="text" class="form-label"  id="name" name="name" placeholder="name " >
+          
+           <br>
+
+           <input type="text" class="form-label" id="password" name="password" placeholder="password " >
+           
+           <br>
+           <br>
+
+           <input type="text"class="form-label"  id="Confirm_password" name="Confirm_password" placeholder="Confirme password" >
+           
+           <br>
+           <button type="submit"  class="btn btn-primary btn-block mb-4" >sign up</button>
+         </form>
+         
+        
+        <main role="main" class="container" style="margin-top: 3rem">
+        </div>
+          
+    </div>
+  </div>
+</div>
+
+
+
+    </form>
+</body>
+</html>

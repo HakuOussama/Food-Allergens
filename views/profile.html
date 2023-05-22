@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+
+@import url(http://fonts.googleapis.com/css?family=Calibri:400,300,700);
+
+body {
+    background-color: #2fadd3;
+    font-family: 'Calibri', sans-serif !important
+} 
+
+.mt-100{ 
+   margin-top:100px;
+}
+.mb-100{
+   margin-bottom:100px;
+}
+.card {
+   position: relative;
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   -webkit-box-orient: vertical;
+   -webkit-box-direction: normal;
+   -ms-flex-direction: column;
+   flex-direction: column;
+   min-width: 0;
+   word-wrap: break-word;
+   background-color: #fff;
+   background-clip: border-box;
+   border: 0px solid transparent;
+   border-radius: 0px;
+}
+
+.card-body {
+   -webkit-box-flex: 1;
+   -ms-flex: 1 1 auto;
+   flex: 1 1 auto;
+   padding: 1.25rem;
+}
+
+.card .card-title {
+   position: relative;
+   font-weight: 600;
+   margin-bottom: 10px;
+}
+
+ul.list-style-none li {
+   list-style: none;
+}
+
+ul.list-style-none li a {
+   color: #673AB7;
+   padding: 8px 0px;
+   display: block;
+   text-decoration: none;
+}
+
+.m-t-5 {
+   margin-top: 5px;
+}
+
+.w-30px {
+   width: 30px;
+}
+.navbar-header{
+  margin-left:5px;
+  width:100%;
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar navbar-expand-sm sticky-top navbar-dark bg-dark" >
+
+        <form action="acceuil" method="post">
+            <button type="submit" class="btn btn-primary mr-2">acceuil</button>
+          </form>
+
+
+        {{^is_authenticated}}
+    <form action="/new_user" method="get"> 
+        <button class="btn btn-primary mr-2" type="submit">New User</button>
+      </form> 
+      
+      <form action="/acceuil" method="post">
+        <button  class="btn btn-primary mr-2" type="submit">guess-acount</button>
+      </form>
+      {{/is_authenticated}}
+
+      {{#is_authenticated}}
+      <form action="/logout" method="post"> <button class="btn btn-danger" type="submit" >logout {{username}} </button></form>
+      {{/is_authenticated}}
+
+      
+      
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="/" style= "text-align:right;">Can I Eat It </a>
+    </nav>
+    <span class="float-right" style="color: aliceblue;" >
+      {{username}}
+      {{name}}
+    </span> 
+    <nav ><form action="/FoodCards" method="get" style= "text-align:right;" >
+      <input type="text" name="title" placeholder="Search Products " id="NomDuProduit"  class="form-control" />
+      <!-- <button type="submit" class="pull-right"> </button> -->
+  </form></nav>
+      
+    
+</nav>
+
+
+
+
+<section style="background-color: #eee;">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col">
+
+        </div>
+      </div>
+  
+     <div class="row">
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <div class="card-body text-center">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                class="rounded-circle img-fluid" style="width: 150px;">
+              <h5 class="my-3"> {{username}}</h5>
+              <p class="text-muted mb-1">id :{{name}}</p>
+ 
+              <div class="d-flex justify-content-center mb-2">
+                {{^isGuest}}  <form action="/deleteUseraccount/{{name}}" method="get">  <button type="submit" class="btn btn-danger" >Delete account</button></form>  {{/isGuest}}
+                <!-- class="btn btn-primary" -->
+                <!-- error -->
+                <form action="/deleteAllAllergy/{{name}}" method="get"><button type="submit" class="btn btn-outline-primary ms-1">delete all Allergy</button></form>
+
+              </div>
+            </div>
+          </div>
+          <div class="card mb-4 mb-lg-0">
+            <div class="card-body p-0">
+              <ul class="list-group list-group-flush rounded-3">
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fas fa-globe fa-lg text-warning"></i>
+                  <form action="/addAllergy/{{name}}" method="get">
+                    <label for="options"><p> Select an <span class="text-primary font-italic me-1"> allergen </span>to add:</p></label>
+                    <select id="options" name="options">
+                        <option value="1">arachide</option>
+                        <option value="2">celery</option>
+                        <option value="3">crustaceans</option>
+                        <option value="4">eggs</option>
+                        <option value="5">fish</option>
+                        <option value="6">gluten</option>
+                        <option value="7">lupin</option>
+                        <option value="8">milk</option>
+                        <option value="9">molluscs</option>
+                        <option value="10">mustard</option>
+                        <option value="12">peanuts</option>
+                        <option value="13">sesame-seeds</option>
+                        <option value="14">soybeans</option>
+                        <option value="15">sulphur-dioxide-and-sulphites</option>
+                   
+                    </select>
+                    <button type="submit">Submit</button>
+                </form>
+                </li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="row d-flex justify-content-center mt-100 mb-100">
+                        
+                                  
+                <!-- <div class="col-lg-6">
+                   
+                   <div class="card">
+                       <div class="card-body text-center">
+                           <h4 class="card-title m-b-0">News Updates</h4>
+                       </div>
+                       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" integrity="sha256-3sPp8BkKUE7QyPSl6VfBByBroQbKxKG7tsusY2mhbVY=" crossorigin="anonymous" /> -->
+
+<div class="container">
+            <div class="row">
+                 <div class="col-lg-10 mx-auto mb-4">
+                    <div class="section-title text-center ">
+                        <h3 class="top-c-sep">Your allergens :</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="career-search mb-60">
+
+                    
+
+                        <div class="filter-result">
+                            <p class="mb-30 ff-montserrat"></p>
+
+                            <div class="job-box d-md-flex align-items-center justify-content-between mb-30">
+                                <div class="job-left my-4 d-md-flex align-items-center flex-wrap">
+                                    <div class="img-holder mr-md-4 mb-md-0 mb-4 mx-auto mx-md-0 d-md-none d-lg-flex">
+                                    </div>
+                                    <div class="job-content">
+                                        
+                                          {{#allergenListen}}
+                                          
+                                          
+                                          <li style="padding: 20px;">{{allergy}}</li>
+                                           
+                                          
+                                            {{/allergenListen}} 
+                                            
+                                        
+                                    </div>
+                                </div>
+                                <div class="job-right my-4 flex-shrink-0">
+                                  {{#allergenListen}}
+                                  <br> <form action="/deleteThisAllergen/{{allergy}} " method="get"><button type="submit" class="btn btn-danger">Delete</button></form>{{/allergenListen}} 
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                       <!-- <ul class="list-style-none">
+                        {{#allergenListen}} 
+                           <li class="d-flex no-block card-body border-top">
+                               <i class="fa fa-plus w-30px m-t-5"></i>
+                               <div>
+                                <span> <p >{{allergy}}</p><form action="/deleteThisAllergen" method="get"><button type="submit"></button></form></span> 
+                                    <span class="text-muted">We have realeased android app version 5.1. update now.</span> 
+                               </div>
+                               <div class="ml-auto">
+                                   <div class="tetx-right">
+                                       <h5 class="text-muted m-b-0">19</h5>
+                                       <span class="text-muted font-16">OCT</span>
+                                   </div>
+                               </div> 
+                           </li>
+                           {{/allergenListen}} 
+                       </ul> -->
+                   </div>
+
+               </div>
+               </div>
+               
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card mb-4 mb-md-0">
+                <div class="card-body">
+                  
+    <!-- <form action="/addAllergy/{{name}}" method="get">
+      <label for="options"><p> Select an <span class="text-primary font-italic me-1"> allergen </span>to add:</p></label>
+      <select id="options" name="options">
+          <option value="1">arachide</option>
+          <option value="2">celery</option>
+          <option value="3">crustaceans</option>
+          <option value="4">eggs</option>
+          <option value="5">fish</option>
+          <option value="6">gluten</option>
+          <option value="7">lupin</option>
+          <option value="8">milk</option>
+          <option value="9">molluscs</option>
+          <option value="10">mustard</option>
+          <option value="12">peanuts</option>
+          <option value="13">sesame-seeds</option>
+          <option value="14">soybeans</option>
+          <option value="15">sulphur-dioxide-and-sulphites</option>
+     
+      </select>
+      <button type="submit">Submit</button>
+  </form> -->
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card mb-4 mb-md-0">
+                <div class="card-body">
+                  
+                  <!-- <form action="/deleteAllergy/{{name}}" method="get">
+                    <label for="options"><p> Select an <span class="text-primary font-italic me-1">allergen</span> to <span style="background-color:rgb(245, 111, 111) ;">remove</span> :</p></label>
+                    <select id="options" name="options">
+                      <option value="1">arachide</option>
+                      <option value="2">celery</option>
+                      <option value="3">crustaceans</option>
+                      <option value="4">eggs</option>
+                      <option value="5">fish</option>
+                      <option value="6">gluten</option>
+                      <option value="7">lupin</option>
+                      <option value="8">milk</option>
+                      <option value="9">molluscs</option>
+                      <option value="10">mustard</option>
+                      <option value="12">peanuts</option>
+                      <option value="13">sesame-seeds</option>
+                      <option value="14">soybeans</option>
+                      <option value="15">sulphur-dioxide-and-sulphites</option>
+                 
+                    </select>
+                    <button type="submit">Submit</button>
+                </form> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+    <!-- <form action="/addAllergy/{{name}}" method="get">  
+        <input type="text" name="idAllergie" placeholder="Reference de l'allergier" >
+        <button type="submit">ADD</button>
+    </form> -->
+    <!-- <form action="/deleteAllergy/{{name}}" method="get">  
+        <input type="text" name="idAllergie" placeholder="Reference de l'allergier" >
+        <button type="submit">deleteAllergy</button>
+    </form> -->
+
+    
+   
+
+    
+  
+
+    
+</body>
+</html>
